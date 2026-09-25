@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Где я теряю себя в проявлении · письменная практика</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fdfafa;
+  --paper2:#f3ebf3;
+  --ink:#2c2340;
+  --soft:#5a5074;
+  --faint:#8d83a8;
+  --rose:#f0b2ce;
+  --rose-d:#bf4f84;
+  --lilac:#cdb0ec;
+  --lilac-d:#8656b0;
+  --sky:#b2cdec;
+  --sky-d:#4b7fb8;
+  --gold:#f0d59c;
+  --gold-d:#b8913c;
+  --line:rgba(134,86,176,.24);
+  --shadow:0 22px 44px -32px rgba(90,76,115,.38);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(ellipse 60% 40% at 88% 0%,rgba(240,178,206,.48),transparent 62%),
+    radial-gradient(ellipse 56% 38% at 2% 16%,rgba(178,205,236,.5),transparent 62%),
+    radial-gradient(ellipse 54% 40% at 70% 76%,rgba(205,176,236,.42),transparent 64%),
+    radial-gradient(ellipse 46% 30% at 14% 90%,rgba(240,213,156,.3),transparent 64%),
+    linear-gradient(172deg,var(--paper),var(--paper2));
+  background-attachment:fixed;
+  color:var(--ink);
+  font-family:'Mulish',sans-serif;font-weight:400;font-size:17px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ——— верхняя полоса прогресса ——— */
+.bar{position:fixed;inset:0 0 auto 0;height:52px;z-index:20;display:flex;align-items:center;gap:14px;
+  padding:0 20px;background:rgba(252,250,248,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(122,106,149,.16)}
+.bar .t{font-family:'Marcellus',serif;font-size:14px;color:var(--lilac-d);white-space:nowrap}
+.bar .track{flex:1;height:4px;border-radius:4px;background:rgba(122,106,149,.14);overflow:hidden}
+.bar .track i{display:block;height:100%;width:0;border-radius:4px;transition:width .4s ease;
+  background:linear-gradient(90deg,var(--sky-d),var(--lilac-d),var(--rose-d))}
+.bar .saved{font-size:11.5px;letter-spacing:.12em;color:var(--faint);font-weight:600;opacity:0;transition:opacity .4s;white-space:nowrap}
+.bar .saved.on{opacity:1}
+
+/* ——— обложка ——— */
+.cover{padding:112px 24px 54px;text-align:center;position:relative;overflow:hidden}
+.cover-in{max-width:660px;margin:0 auto;position:relative;z-index:1}
+.eye{display:inline-flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  font-weight:600;color:#8a3d69;padding:9px 22px;border-radius:30px;
+  background:linear-gradient(120deg,rgba(178,205,236,.55),rgba(205,176,236,.5),rgba(240,178,206,.6));
+  border:1px solid rgba(191,79,132,.3)}
+h1{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(38px,8.4vw,62px);line-height:1.06;margin:24px 0 0;letter-spacing:.01em;color:var(--ink)}
+h1 .q{background:linear-gradient(100deg,#3f82c2,#8656b0 52%,#cc4785);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hr{width:150px;height:2.5px;border-radius:3px;margin:28px auto;
+  background:linear-gradient(90deg,var(--sky),var(--lilac),var(--rose),var(--gold))}
+.lede{color:var(--soft);max-width:56ch;margin:0 auto}
+.lede p+p{margin-top:13px}
+.task{margin:32px auto 0;max-width:600px;padding:24px 26px 24px 30px;border-radius:20px;text-align:left;
+  position:relative;overflow:hidden;background:rgba(255,255,255,.88);border:1px solid rgba(122,106,149,.16);
+  font-family:'Marcellus',serif;font-size:20px;line-height:1.5;color:#3b3348;
+  box-shadow:0 22px 44px -34px rgba(90,76,115,.6)}
+.task::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;
+  background:linear-gradient(180deg,var(--sky-d),var(--lilac-d),var(--rose-d))}
+.petal{position:absolute;border-radius:50%;filter:blur(2px);opacity:.42;pointer-events:none}
+
+/* ——— шаги ——— */
+main{max-width:660px;margin:0 auto;padding:0 24px 30px}
+.step{margin-top:66px}
+.step-h{display:flex;align-items:center;gap:15px}
+.step-n{font-family:'Marcellus',serif;font-size:16px;flex:none;
+  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid transparent;box-shadow:0 12px 22px -14px rgba(90,60,130,.85);color:#fff}
+.step:nth-of-type(1) .step-n{background:linear-gradient(140deg,#7ba8d8,#4b7fb8)}
+.step:nth-of-type(2) .step-n{background:linear-gradient(140deg,#ab85d4,#8656b0)}
+.step:nth-of-type(3) .step-n{background:linear-gradient(140deg,#dd85ae,#bf4f84)}
+.step:nth-of-type(4) .step-n{background:linear-gradient(140deg,#e7bd74,#b8913c)}
+h2{font-family:'Marcellus',serif;font-weight:400;font-size:clamp(26px,5.4vw,34px);line-height:1.18;color:var(--ink)}
+.step p{margin-top:15px;max-width:60ch}
+p.soft{color:var(--soft)}
+.ask{list-style:none;margin-top:18px}
+.ask li{position:relative;padding:7px 0 7px 26px;margin-top:3px;font-size:17.5px;color:#3a3348;font-weight:500}
+.ask li::before{content:'';position:absolute;left:1px;top:15px;width:7px;height:7px;border-radius:50%;
+  background:linear-gradient(135deg,var(--sky-d),var(--rose-d))}
+.strip{margin-top:18px;padding:16px 20px;border-radius:14px;
+  background:linear-gradient(100deg,rgba(178,205,236,.28),rgba(255,255,255,.62) 60%);
+  border-left:3px solid var(--sky-d)}
+.strip p{margin-top:6px;color:var(--soft)}
+.strip p:first-child{margin-top:0}
+.pull{margin-top:22px;font-family:'Marcellus',serif;font-size:23px;line-height:1.42;max-width:52ch;
+  background:linear-gradient(100deg,#4b7fb8,#8656b0 55%,#bf4f84);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.arrow{margin-top:26px;text-align:center;color:var(--rose-d);font-size:18px;letter-spacing:.2em}
+hr.rule{border:none;height:1.5px;border-radius:2px;margin-top:56px;
+  background:linear-gradient(90deg,transparent,var(--sky),var(--lilac),var(--rose),transparent)}
+
+/* ——— поля для письма ——— */
+.card{margin-top:22px;background:rgba(255,255,255,.88);border:1px solid rgba(122,106,149,.16);position:relative;overflow:hidden;
+  border-radius:20px;padding:22px 24px;box-shadow:0 22px 44px -34px rgba(90,76,115,.6)}
+.card::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;
+  background:linear-gradient(90deg,var(--sky-d),var(--lilac-d),var(--rose-d),var(--gold-d))}
+.card.chain{padding-top:10px}
+.f{padding:16px 0;border-bottom:1px dashed rgba(122,106,149,.22)}
+.f:last-child{border-bottom:none;padding-bottom:6px}
+.f .lb{font-family:'Marcellus',serif;font-size:19px;line-height:1.4;color:var(--lilac-d)}
+textarea{width:100%;resize:none;overflow:hidden;background:rgba(246,240,250,.85);
+  font-family:'Mulish',sans-serif;font-weight:500;font-size:16.5px;line-height:1.7;color:var(--ink);
+  margin-top:10px;padding:10px 14px;border:1px solid rgba(122,106,149,.2);
+  border-bottom:1.5px solid rgba(122,106,149,.32);min-height:48px;
+  transition:border-color .25s,background .25s,box-shadow .25s;border-radius:10px}
+textarea::placeholder{color:#a79fb6;font-style:italic;font-weight:400}
+textarea:focus{outline:none;border-color:var(--rose-d);background:#fff;
+  box-shadow:0 0 0 3px rgba(226,188,203,.35)}
+textarea.filled{background:#fff;border-bottom-color:var(--sky-d)}
+
+/* ——— варианты ——— */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.chip{font-family:'Mulish';font-size:14.5px;font-weight:600;padding:9px 18px;border-radius:24px;cursor:pointer;
+  border:1px solid rgba(95,123,153,.4);color:var(--sky-d);background:rgba(255,255,255,.75);
+  transition:transform .18s,background .25s,color .25s,border-color .25s,box-shadow .25s;user-select:none}
+.chip:hover{transform:translateY(-1px);box-shadow:0 8px 18px -14px rgba(95,123,153,.9)}
+.chip:focus-visible{outline:2px solid var(--sky-d);outline-offset:2px}
+.chip.on{background:linear-gradient(120deg,#6b9dd2,#4b7fb8);color:#fff;border-color:transparent;
+  box-shadow:0 10px 20px -14px rgba(95,123,153,.9)}
+.chips.rose .chip{color:var(--rose-d);border-color:rgba(164,102,127,.4)}
+.chips.rose .chip.on{background:linear-gradient(120deg,#dd7aa9,#bf4f84);color:#fff;border-color:transparent;
+  box-shadow:0 10px 20px -14px rgba(164,102,127,.9)}
+
+/* ——— развилка ——— */
+.forkq{margin-top:26px;text-align:center}
+.forkq .fq{font-family:'Marcellus',serif;font-size:25px;color:var(--lilac-d)}
+.forkbtns{display:flex;gap:12px;justify-content:center;margin-top:18px}
+.fb{font-family:'Marcellus',serif;font-size:18px;padding:13px 40px;border-radius:30px;cursor:pointer;
+  border:1px solid rgba(122,106,149,.35);background:rgba(255,255,255,.8);color:var(--lilac-d);transition:.25s;font-weight:400}
+.fb:hover{border-color:var(--rose-d);transform:translateY(-1px)}
+.fb:focus-visible{outline:2px solid var(--sky-d);outline-offset:2px}
+.fb.on{background:linear-gradient(120deg,#9a6ac2,#bf4f84);border-color:transparent;color:#fff;
+  box-shadow:0 12px 24px -16px rgba(90,76,115,.9)}
+.branch{display:none;margin-top:22px;padding:22px;border-radius:20px;
+  background:rgba(255,255,255,.58);border:1px solid rgba(122,106,149,.14)}
+.branch.show{display:block;animation:rise .45s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ——— завершение ——— */
+.close{margin-top:72px;padding:46px 30px;border-radius:24px;text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(155deg,rgba(178,205,236,.62),rgba(205,176,236,.5) 48%,rgba(240,178,206,.6));
+  border:1px solid rgba(122,106,149,.14);
+  box-shadow:0 24px 48px -34px rgba(90,76,115,.6)}
+.close::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;
+  background:linear-gradient(90deg,var(--sky-d),var(--lilac-d),var(--rose-d))}
+.mark{color:var(--rose-d);font-size:19px;letter-spacing:.3em}
+.close h2{margin-top:14px;color:var(--ink)}
+.close p{margin-top:14px;text-align:left;color:#443c55}
+.seeing{list-style:none;margin-top:22px;text-align:left}
+.seeing li{position:relative;padding:14px 16px 14px 34px;margin-top:8px;border-radius:12px;
+  background:rgba(255,255,255,.72);
+  font-family:'Marcellus',serif;font-size:19px;line-height:1.45;color:#3a3348}
+.seeing li::before{content:'◇';position:absolute;left:14px;top:16px;font-size:12px;color:var(--rose-d)}
+
+.share{margin-top:66px;text-align:center}
+.share .inf{color:var(--lilac-d);font-size:21px;letter-spacing:.3em}
+.share h2{margin-top:12px}
+.share>p{margin-top:14px;color:var(--soft)}
+.starters{margin-top:22px;display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+.starters button{font-family:'Marcellus',serif;font-size:16px;line-height:1.35;text-align:left;cursor:pointer;
+  padding:13px 20px;border-radius:16px;border:1px solid rgba(122,106,149,.24);background:rgba(255,255,255,.8);
+  color:#3d3550;transition:.22s;max-width:100%;box-shadow:0 14px 28px -28px rgba(90,76,115,.9)}
+.starters button:hover{border-color:var(--rose-d);transform:translateY(-1px)}
+.starters button:focus-visible{outline:2px solid var(--sky-d);outline-offset:2px}
+.final{margin-top:32px;font-family:'Marcellus',serif;font-size:21px;line-height:1.5;color:var(--ink);
+  padding:22px;border-radius:18px;
+  background:linear-gradient(120deg,rgba(178,205,236,.4),rgba(240,178,206,.45));
+  border:1px solid rgba(134,86,176,.16)}
+
+/* ——— действия ——— */
+.actions{margin-top:34px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.act{font-family:'Mulish';font-weight:600;font-size:14px;padding:13px 26px;border-radius:30px;cursor:pointer;border:none;transition:.22s}
+.act.p{background:linear-gradient(120deg,#4b7fb8,#8656b0 52%,#bf4f84);color:#fff;box-shadow:0 16px 30px -18px rgba(110,60,140,.95)}
+.act.s{background:rgba(255,255,255,.8);border:1px solid rgba(122,106,149,.28);color:var(--lilac-d);font-weight:600}
+.act:hover{transform:translateY(-1px)}
+.act:focus-visible{outline:2px solid var(--sky-d);outline-offset:2px}
+.hint{margin-top:12px;text-align:center;font-size:12.5px;color:var(--faint);min-height:18px}
+
+footer{max-width:660px;margin:0 auto;padding:54px 24px 68px;text-align:center;
+  font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;color:var(--faint)}
+footer::before{content:'⟡';display:block;font-size:15px;letter-spacing:0;margin-bottom:16px;color:var(--rose-d);opacity:.8}
+
+@media (max-width:520px){
+  body{font-size:16px}
+  .cover{padding:92px 20px 44px}
+  main{padding:0 20px 24px}
+  .task{padding:20px;font-size:18.5px}
+  .card{padding:18px 18px;border-radius:18px}
+  .close{padding:32px 20px;border-radius:22px}
+  .bar .t{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{
+  body{background:#fff}
+  .bar,.actions,.hint,.petal,.chip:not(.on){display:none}
+  .card,.close,.task{box-shadow:none;background:none;border:1px solid #ddd6e6}
+  textarea{border-bottom:1px solid #ddd6e6}
+  .branch{display:block}
+  .step{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <span class="t">Практика · проявление</span>
+  <span class="track"><i id="pgi"></i></span>
+  <span class="t" id="pgn">0 / 8</span>
+  <span class="saved" id="sv">сохранено</span>
+</div>
+
+<header class="cover">
+  <div class="cover-in">
+    <div class="eye">◈ Письменная практика</div>
+    <h1>Где я теряю себя<br>в <span class="q">проявлении?</span></h1>
+    <div class="hr"></div>
+    <div class="lede">
+      <p>Теперь я предлагаю тебе не просто заметить, что что-то откликнулось в подкасте.</p>
+      <p>А погрузиться немного глубже в себя и посмотреть, что именно этот отклик показывает тебе о твоём собственном проявлении.</p>
+    </div>
+    <div class="task">Возьми один конкретный пример, когда ты хотела проявиться, но остановила себя, что-то изменила или долго не решалась показать. Это может быть пост, видео, подкаст или любое другое проявление.</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1 -->
+  <section class="step">
+    <div class="step-h"><div class="step-n">◇ 1</div><h2>Вспомни свой первоначальный импульс</h2></div>
+    <ul class="ask">
+      <li>Что тебе изначально захотелось сказать, показать или сделать?</li>
+      <li>Какой была твоя первая мысль или идея — до того, как подключился ум?</li>
+    </ul>
+    <p class="soft">Не редактируй её и не делай красивее.<br>Просто запиши:</p>
+    <div class="card">
+      <div class="f">
+        <div class="lb">Сначала мне захотелось</div>
+        <textarea data-k="impulse" data-label="Сначала мне захотелось" placeholder="пиши как идёт"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 2 -->
+  <section class="step">
+    <div class="step-h"><div class="step-n">◇ 2</div><h2>Посмотри, что произошло дальше</h2></div>
+    <p class="soft">Теперь восстанови эту ситуацию по шагам.</p>
+    <ul class="ask">
+      <li>Какие мысли появились после твоего первоначального желания?</li>
+      <li>Что ты начала себе объяснять?</li>
+      <li>Что стало для тебя важнее самого желания?</li>
+    </ul>
+    <div class="strip">
+      <p>Может быть, ты начала думать, достаточно ли это интересно, глубоко или экспертно.</p>
+      <p>Начала представлять, как это воспримут другие.</p>
+      <p>Посмотрела, как проявляются другие женщины.</p>
+      <p>Подумала о том, увидит ли это БП.</p>
+      <p>Начала подбирать слова так, чтобы тебя точно правильно поняли.</p>
+    </div>
+    <p>Запиши эту цепочку:</p>
+    <div class="card chain">
+      <div class="f"><div class="lb">Сначала я хотела</div>
+        <textarea data-k="c1" data-label="Сначала я хотела"></textarea></div>
+      <div class="f"><div class="lb">Потом я подумала</div>
+        <textarea data-k="c2" data-label="Потом я подумала"></textarea></div>
+      <div class="f"><div class="lb">После этого мне стало важно</div>
+        <textarea data-k="c3" data-label="После этого мне стало важно"></textarea></div>
+      <div class="f"><div class="lb">В итоге я</div>
+        <textarea data-k="c4" data-label="В итоге я"></textarea></div>
+    </div>
+    <div class="arrow">↓</div>
+    <p class="pull">Посмотри на этот момент внимательно. Где именно твоё первоначальное желание начало меняться под влиянием этих мыслей?</p>
+    <div class="card">
+      <div class="f"><textarea data-k="turn" data-label="Где желание начало меняться" placeholder="здесь"></textarea></div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 3 -->
+  <section class="step">
+    <div class="step-h"><div class="step-n">◇ 3</div><h2>Чьим взглядом ты начала смотреть на себя?</h2></div>
+    <p>Когда ты начала менять своё первоначальное желание, на чей взгляд ты начала ориентироваться?</p>
+    <div class="chips" data-k="gaze" data-label="Чей взгляд">
+      <button class="chip">БП?</button>
+      <button class="chip">Аудитории?</button>
+      <button class="chip">Других женщин?</button>
+      <button class="chip">Экспертов?</button>
+      <button class="chip">Близких?</button>
+    </div>
+    <p class="soft">Или на своё собственное представление о том, какой тебе нужно быть, чтобы тебя правильно воспринимали?</p>
+    <div class="arrow">↓</div>
+    <p>Что именно ты изменила в своём проявлении под влиянием этого взгляда?</p>
+    <div class="chips rose" data-k="changed" data-label="Что изменила">
+      <button class="chip">Что-то убрала?</button>
+      <button class="chip">Переписала?</button>
+      <button class="chip">Смягчила?</button>
+      <button class="chip">Добавила?</button>
+      <button class="chip">Сделала более «экспертным»?</button>
+      <button class="chip">Отказалась от публикации?</button>
+    </div>
+    <p class="pull">Что конкретно произошло с твоим первоначальным импульсом?</p>
+    <div class="card">
+      <div class="f"><textarea data-k="impulse_end" data-label="Что произошло с импульсом"></textarea></div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- 4 -->
+  <section class="step">
+    <div class="step-h"><div class="step-n">◇ 4</div><h2>А теперь вернись к себе</h2></div>
+    <p>Отложи на несколько минут всё, что ты увидела выше.</p>
+    <p>Представь ту же ситуацию, но без необходимости соответствовать чьим-либо ожиданиям.</p>
+    <div class="strip">
+      <p>Тебе не нужно выглядеть определённым образом.</p>
+      <p>Не нужно быть понятой.</p>
+      <p>Не нужно производить впечатление.</p>
+      <p>Не нужно получать чью-то реакцию.</p>
+    </div>
+    <p>Останься только со своим первоначальным желанием.</p>
+
+    <div class="forkq">
+      <div class="fq">Ты всё ещё хочешь это сказать?</div>
+      <div class="forkbtns">
+        <button class="fb" id="fyes">Да</button>
+        <button class="fb" id="fno">Нет</button>
+      </div>
+    </div>
+
+    <div class="branch" id="byes">
+      <p>Что именно тебе хочется сказать — простыми словами, без попытки сделать это правильным, красивым или достаточно глубоким?</p>
+      <ul class="ask">
+        <li>Что там было твоего?</li>
+        <li>Что тебе действительно важно донести?</li>
+        <li>О чём тебе хочется говорить?</li>
+        <li>Что тебе хочется создавать?</li>
+        <li>Что ты хочешь позволить себе проявлять, даже если пока не знаешь, как это будет воспринято?</li>
+      </ul>
+      <p class="soft">И закончи:</p>
+      <div class="card">
+        <div class="f">
+          <div class="lb">Если мне не нужно никому ничего доказывать и создавать определённое впечатление о себе, я хочу проявляться через / я хочу сказать / я хочу сделать</div>
+          <textarea data-k="yes" data-label="Я хочу проявляться через / сказать / сделать"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch" id="bno">
+      <p>Что изменилось в твоём восприятии этого желания?</p>
+      <ul class="ask">
+        <li>Что ты видишь в нём сейчас, чего не замечала раньше?</li>
+        <li>Что это желание показывает тебе о тебе самой?</li>
+      </ul>
+      <div class="card">
+        <div class="f"><textarea data-k="no" data-label="Что изменилось в восприятии желания"></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- завершение -->
+  <section class="close">
+    <div class="mark">✦</div>
+    <h2>А теперь просто побудь с тем, что увидела</h2>
+    <p>Не спеши сразу что-то менять.</p>
+    <p>Не нужно после этой практики срочно записывать видео, переписывать свой блог или заставлять себя проявляться по-новому.</p>
+    <p>Для начала достаточно увидеть.</p>
+    <ul class="seeing">
+      <li>Увидеть, где ты перестаёшь слышать своё первоначальное желание.</li>
+      <li>Увидеть, в какой момент в твоё проявление входит чужой взгляд.</li>
+      <li>Увидеть, где тебе становится важно, как тебя воспримут.</li>
+      <li>Увидеть, где появляется желание заранее определить, что произойдёт после твоих слов.</li>
+    </ul>
+    <div class="arrow">↓</div>
+    <p>Позволь этому осознанию немного пожить внутри.</p>
+    <p>И если из него позже родится новое действие, пусть оно будет не из:<br>«Мне теперь надо проявляться правильно»,<br>а из более ясного понимания себя.</p>
+  </section>
+
+  <!-- осознание -->
+  <section class="share">
+    <div class="inf">∞</div>
+    <h2>И поделись своим осознанием</h2>
+    <p>Выбери то, что оказалось для тебя самым важным, неожиданным или живым.<br>Можно начать так:</p>
+    <div class="starters" id="st">
+      <button>«Пока я делала практику, я увидела, что…»</button>
+      <button>«Больше всего меня зацепил вопрос…»</button>
+      <button>«Я поняла, что в проявлении я на самом деле…»</button>
+      <button>«Раньше я думала, что мне мешает ________, а сейчас увидела, что за этим стоит ________.»</button>
+      <button>«Мой маленький шаг в проявление сейчас — ________.»</button>
+    </div>
+    <div class="card">
+      <div class="f"><textarea data-k="share" data-label="Моё осознание" placeholder="нажми на фразу выше, чтобы начать"></textarea></div>
+    </div>
+    <div class="final">Не нужно писать красиво.<br>Поделись тем, что стало видно тебе самой ♡</div>
+
+    <div class="actions">
+      <button class="act p" id="copy">Скопировать ответы</button>
+      <button class="act s" id="print">Сохранить в PDF</button>
+      <button class="act s" id="clear">Очистить</button>
+    </div>
+    <div class="hint" id="hint"></div>
+  </section>
+
+</main>
+
+<footer>Meta Alchemy</footer>
+
+<script>
+(function(){
+  var KEY='ma_practice_projavlenie_v1';
+
+  /* хранилище: артефакт → window.storage, сайт → localStorage, иначе память */
+  var mem={};
+  var store={
+    get:async function(){
+      try{ if(window.storage&&window.storage.get){var r=await window.storage.get(KEY);return r&&r.value?JSON.parse(r.value):null} }catch(e){}
+      try{ var s=localStorage.getItem(KEY);return s?JSON.parse(s):null }catch(e){}
+      return mem.d||null;
+    },
+    set:async function(d){
+      mem.d=d;
+      try{ if(window.storage&&window.storage.set){await window.storage.set(KEY,JSON.stringify(d));return true} }catch(e){}
+      try{ localStorage.setItem(KEY,JSON.stringify(d));return true }catch(e){}
+      return false;
+    },
+    del:async function(){
+      mem.d=null;
+      try{ if(window.storage&&window.storage.delete){await window.storage.delete(KEY)} }catch(e){}
+      try{ localStorage.removeItem(KEY) }catch(e){}
+    }
+  };
+
+  var data={fields:{},chips:{},fork:''};
+  var areas=[].slice.call(document.querySelectorAll('textarea'));
+  var chipGroups=[].slice.call(document.querySelectorAll('.chips'));
+  var pgi=document.getElementById('pgi'),pgn=document.getElementById('pgn'),sv=document.getElementById('sv'),hint=document.getElementById('hint');
+
+  function grow(t){t.style.height='auto';t.style.height=(t.scrollHeight)+'px'}
+
+  function progress(){
+    var total=8,done=0;
+    ['impulse','c1','c2','c3','c4','turn','impulse_end'].forEach(function(k){if((data.fields[k]||'').trim())done++});
+    if(((data.fields.yes||'')+(data.fields.no||'')).trim())done++;
+    pgi.style.width=(done/total*100)+'%';
+    pgn.textContent=done+' / '+total;
+  }
+
+  var tSv;
+  function flash(){sv.classList.add('on');clearTimeout(tSv);tSv=setTimeout(function(){sv.classList.remove('on')},1600)}
+
+  var tSave;
+  function save(){clearTimeout(tSave);tSave=setTimeout(function(){store.set(data).then(function(ok){if(ok)flash()})},500)}
+
+  areas.forEach(function(t){
+    t.addEventListener('input',function(){
+      grow(t);
+      data.fields[t.dataset.k]=t.value;
+      t.classList.toggle('filled',!!t.value.trim());
+      progress();save();
+    });
+  });
+
+  chipGroups.forEach(function(g){
+    var k=g.dataset.k;data.chips[k]=data.chips[k]||[];
+    [].slice.call(g.querySelectorAll('.chip')).forEach(function(c){
+      c.addEventListener('click',function(){
+        c.classList.toggle('on');
+        var arr=[].slice.call(g.querySelectorAll('.chip.on')).map(function(x){return x.textContent});
+        data.chips[k]=arr;save();
+      });
+    });
+  });
+
+  var yes=document.getElementById('fyes'),no=document.getElementById('fno'),
+      byes=document.getElementById('byes'),bno=document.getElementById('bno');
+  function fork(v,scroll){
+    data.fork=v;
+    yes.classList.toggle('on',v==='yes');no.classList.toggle('on',v==='no');
+    byes.classList.toggle('show',v==='yes');bno.classList.toggle('show',v==='no');
+    if(scroll){var b=v==='yes'?byes:bno;setTimeout(function(){b.scrollIntoView({behavior:'smooth',block:'nearest'})},60)}
+    save();
+  }
+  yes.addEventListener('click',function(){fork('yes',true)});
+  no.addEventListener('click',function(){fork('no',true)});
+
+  document.getElementById('st').addEventListener('click',function(e){
+    if(e.target.tagName!=='BUTTON')return;
+    var t=document.querySelector('textarea[data-k="share"]');
+    var base=e.target.textContent.replace(/[«»]/g,'').replace(/…\s*$/,' ');
+    t.value=(t.value.trim()?t.value.trim()+'\n\n':'')+base;
+    data.fields.share=t.value;grow(t);t.focus();
+    t.setSelectionRange(t.value.length,t.value.length);save();
+  });
+
+  document.getElementById('copy').addEventListener('click',function(){
+    var out=['Где я теряю себя в проявлении',''];
+    areas.forEach(function(t){
+      var v=(t.value||'').trim();if(!v)return;
+      if(t.dataset.k==='yes'&&data.fork!=='yes')return;
+      if(t.dataset.k==='no'&&data.fork!=='no')return;
+      out.push(t.dataset.label+': '+v);
+    });
+    chipGroups.forEach(function(g){
+      var a=data.chips[g.dataset.k]||[];
+      if(a.length)out.push(g.dataset.label+': '+a.join(', ').replace(/\?/g,''));
+    });
+    var txt=out.join('\n\n');
+    function done(ok){hint.textContent=ok?'Ответы скопированы — можно вставить в дневник или в чат':'Не получилось скопировать. Выдели текст вручную'}
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){done(true)},function(){done(false)});
+    }else{
+      var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');done(true)}catch(e){done(false)}
+      document.body.removeChild(ta);
+    }
+  });
+
+  document.getElementById('print').addEventListener('click',function(){window.print()});
+
+  document.getElementById('clear').addEventListener('click',function(){
+    if(!confirm('Удалить все записи этой практики?'))return;
+    areas.forEach(function(t){t.value='';t.classList.remove('filled');grow(t)});
+    document.querySelectorAll('.chip.on').forEach(function(c){c.classList.remove('on')});
+    data={fields:{},chips:{},fork:''};
+    yes.classList.remove('on');no.classList.remove('on');
+    byes.classList.remove('show');bno.classList.remove('show');
+    progress();store.del();hint.textContent='Поле чистое';
+  });
+
+  /* мягкие лепестки на обложке */
+  var cover=document.querySelector('.cover');
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var cols=['rgba(221,138,178,.6)','rgba(122,168,216,.55)','rgba(171,133,212,.55)','rgba(231,189,116,.55)'];
+    for(var i=0;i<8;i++){
+      var d=document.createElement('div');d.className='petal';
+      var s=6+Math.random()*16;
+      d.style.cssText='width:'+s+'px;height:'+s+'px;background:'+cols[i%4]+
+        ';left:'+(Math.random()*92+2)+'%;top:'+(Math.random()*76+8)+'%';
+      cover.appendChild(d);
+    }
+  }
+
+  /* восстановление */
+  store.get().then(function(d){
+    if(d){
+      data={fields:d.fields||{},chips:d.chips||{},fork:d.fork||''};
+      areas.forEach(function(t){
+        var v=data.fields[t.dataset.k];
+        if(v){t.value=v;t.classList.add('filled')}
+        grow(t);
+      });
+      chipGroups.forEach(function(g){
+        var a=data.chips[g.dataset.k]||[];
+        [].slice.call(g.querySelectorAll('.chip')).forEach(function(c){
+          if(a.indexOf(c.textContent)>-1)c.classList.add('on');
+        });
+      });
+      if(data.fork)fork(data.fork,false);
+    }
+    areas.forEach(grow);
+    progress();
+  });
+})();
+</script>
+</body>
+  </html>
